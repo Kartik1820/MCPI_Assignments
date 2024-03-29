@@ -15,38 +15,37 @@
  *
  ******************************************************************************
  */
+
 #include <stdint.h>
 #include <stdio.h>
 #include "stm32f4xx.h"
 #include "system_stm32f4xx.h"
 
-#include "led1_anti.h"
+#include "lcd.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-
-
-
-
 int main(void)
 {
 	SystemInit();
-	DelayMs(1);
-	LedInit(LED_GREEN);
-	LedInit(LED_ORANGE);
-	LedInit(LED_RED);
-	LedInit(LED_BLUE);
-	while(1) {
-		LedBlink(LED_GREEN, 200);
-		LedBlink(LED_ORANGE, 200);
-		LedBlink(LED_RED, 200);
-		LedBlink(LED_BLUE, 200);		
-		LedBlink(LED_BLUE,200);
-		LedBlink(LED_RED, 200);
-		LedBlink(LED_ORANGE, 200);
-		LedBlink(LED_GREEN, 200);
-	}
+	LcdInit();
+	LcdPuts(LCD_LINE1, "HOTEL JAGADAMBA  OFFER IS GOING ON !!!!");
+	LcdPuts(LCD_LINE2, "CHICKEN PLATE ! PANNER MASLA ! FISH FRY !");
+
+	for(int i=1;i<16;i++){
+
+		DelayMs(1000);
+		LcdWrite(LCD_CMD,LCD_CURS);
+
+	}LcdWrite(LCD_CMD,LCD_CLEAR);
 	return 0;
 }
+
+
+
+
+
+
+
